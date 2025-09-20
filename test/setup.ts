@@ -78,39 +78,12 @@ global.Blob = vi.fn().mockImplementation((content, options) => ({
   type: options?.type || 'text/plain'
 }));
 
-// Mock document methods
-Object.defineProperty(document, 'createElement', {
-  value: vi.fn((tagName) => ({
-    tagName: tagName.toUpperCase(),
-    id: '',
-    className: '',
-    textContent: '',
-    style: {},
-    setAttribute: vi.fn(),
-    getAttribute: vi.fn(),
-    hasAttribute: vi.fn(),
-    removeAttribute: vi.fn(),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    appendChild: vi.fn(),
-    removeChild: vi.fn(),
-    querySelector: vi.fn(),
-    querySelectorAll: vi.fn(() => []),
-    getBoundingClientRect: vi.fn(() => ({
-      x: 0,
-      y: 0,
-      width: 100,
-      height: 100,
-      top: 0,
-      right: 100,
-      bottom: 100,
-      left: 0
-    })),
-    focus: vi.fn(),
-    blur: vi.fn(),
-    click: vi.fn(),
-    scrollIntoView: vi.fn()
-  }))
+// Mock document methods - use real DOM methods but with proper mocking
+const originalCreateElement = document.createElement;
+document.createElement = vi.fn((tagName) => {
+  const element = originalCreateElement.call(document, tagName);
+  // Add any additional mocking if needed
+  return element;
 });
 
 // Mock window.getComputedStyle
