@@ -114,7 +114,7 @@ export class AccessibilityAuditor {
     }
 
     return this.runAudit({
-      include: elements
+      include: elements.filter(el => el !== null).map(el => el.tagName.toLowerCase())
     });
   }
 

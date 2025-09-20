@@ -321,8 +321,8 @@ class AutoAccessContent {
     const images = document.querySelectorAll('img');
     images.forEach(img => {
       const htmlImg = img as HTMLElement;
-      if (!htmlImg.alt) {
-        htmlImg.alt = 'Image';
+      if (!(htmlImg as HTMLImageElement).alt) {
+        (htmlImg as HTMLImageElement).alt = 'Image';
       }
     });
   }
@@ -1830,7 +1830,7 @@ class AutoAccessContent {
           console.warn(`Import attempt ${importAttempts} failed:`, importError);
           
           if (importAttempts >= maxAttempts) {
-            throw new Error(`Failed to import imageLabelingService after ${maxAttempts} attempts: ${importError.message}`);
+            throw new Error(`Failed to import imageLabelingService after ${maxAttempts} attempts: ${importError instanceof Error ? importError.message : String(importError)}`);
           }
           
           // Wait before retrying

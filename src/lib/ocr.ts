@@ -2,7 +2,7 @@ import Tesseract from 'tesseract.js';
 import { OCRResult } from './types.js';
 
 export class OCRService {
-  private worker: Tesseract.Worker | null = null;
+  private worker: any = null;
   private isInitialized = false;
   private initializationPromise: Promise<void> | null = null;
 

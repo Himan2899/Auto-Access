@@ -118,7 +118,7 @@ export class ContrastFixer {
       const computedStyle = window.getComputedStyle(htmlElement);
       const backgroundColor = this.parseColor(computedStyle.backgroundColor);
       
-      if (backgroundColor && backgroundColor !== 'transparent') {
+      if (backgroundColor && (backgroundColor as any) !== 'transparent') {
         const textColor = this.parseColor(computedStyle.color);
         
         if (textColor) {
@@ -142,7 +142,7 @@ export class ContrastFixer {
       const borderColor = this.parseColor(computedStyle.borderColor);
       const backgroundColor = this.getBackgroundColor(htmlElement);
       
-      if (borderColor && backgroundColor && borderColor !== 'transparent') {
+      if (borderColor && backgroundColor && (borderColor as any) !== 'transparent') {
         const contrastRatio = this.calculateContrastRatio(borderColor, backgroundColor);
         
         if (contrastRatio < this.currentOptions.targetRatio) {
@@ -199,7 +199,7 @@ export class ContrastFixer {
       const computedStyle = window.getComputedStyle(currentElement);
       const backgroundColor = this.parseColor(computedStyle.backgroundColor);
       
-      if (backgroundColor && backgroundColor !== 'transparent') {
+      if (backgroundColor && (backgroundColor as any) !== 'transparent') {
         return backgroundColor;
       }
       

@@ -87,41 +87,44 @@ document.createElement = vi.fn((tagName) => {
 });
 
 // Mock window.getComputedStyle
-global.getComputedStyle = vi.fn(() => ({
-  display: 'block',
-  visibility: 'visible',
-  opacity: '1',
-  position: 'static',
-  color: 'rgb(0, 0, 0)',
-  backgroundColor: 'rgb(255, 255, 255)',
-  fontSize: '16px',
-  fontFamily: 'Arial',
-  fontWeight: 'normal',
-  lineHeight: 'normal',
-  textAlign: 'left',
-  margin: '0px',
-  padding: '0px',
-  border: '0px',
-  getPropertyValue: vi.fn((property) => {
-    const styles: Record<string, string> = {
-      'display': 'block',
-      'visibility': 'visible',
-      'opacity': '1',
-      'position': 'static',
-      'color': 'rgb(0, 0, 0)',
-      'background-color': 'rgb(255, 255, 255)',
-      'font-size': '16px',
-      'font-family': 'Arial',
-      'font-weight': 'normal',
-      'line-height': 'normal',
-      'text-align': 'left',
-      'margin': '0px',
-      'padding': '0px',
-      'border': '0px'
-    };
-    return styles[property] || '';
-  })
-}));
+global.getComputedStyle = vi.fn(() => {
+  const mockStyle = {
+    display: 'block',
+    visibility: 'visible',
+    opacity: '1',
+    position: 'static',
+    color: 'rgb(0, 0, 0)',
+    backgroundColor: 'rgb(255, 255, 255)',
+    fontSize: '16px',
+    fontFamily: 'Arial',
+    fontWeight: 'normal',
+    lineHeight: 'normal',
+    textAlign: 'left',
+    margin: '0px',
+    padding: '0px',
+    border: '0px',
+    getPropertyValue: vi.fn((property: string) => {
+      const styles: Record<string, string> = {
+        'display': 'block',
+        'visibility': 'visible',
+        'opacity': '1',
+        'position': 'static',
+        'color': 'rgb(0, 0, 0)',
+        'background-color': 'rgb(255, 255, 255)',
+        'font-size': '16px',
+        'font-family': 'Arial',
+        'font-weight': 'normal',
+        'line-height': 'normal',
+        'text-align': 'left',
+        'margin': '0px',
+        'padding': '0px',
+        'border': '0px'
+      };
+      return styles[property] || '';
+    })
+  };
+  return mockStyle as any;
+});
 
 // Mock console methods to reduce noise in tests
 global.console = {

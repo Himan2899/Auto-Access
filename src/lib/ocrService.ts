@@ -152,7 +152,7 @@ class OCRService {
         hasText: false,
         imageType,
         estimatedComplexity,
-        error: error instanceof Error ? error.message : 'OCR analysis failed'
+        // error: error instanceof Error ? error.message : 'OCR analysis failed'
       };
     }
   }
