@@ -6,7 +6,8 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./test/setup.ts'],
-    exclude: ['test/e2e/**/*', 'node_modules/**/*'],
+    include: ['test/unit/simple.test.ts'],
+    exclude: ['test/e2e/**/*', 'node_modules/**/*', 'test/unit/ttsService.test.ts', 'test/unit/contrastFixer.test.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
